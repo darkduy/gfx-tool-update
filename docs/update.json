@@ -1,5 +1,5 @@
 {
-  "latest_version": "1.0.0",
-  "changelog": "Initial release: benchmark, presets, UI, auto-update.",
-  "download_url": "https://github.com/dark-duy/gfx-tool-update/raw/main/docs/GFXTool_1.0.0.mcaddon"
+  "latest_version": "1.5.0",
+  "download_url": "https://darkduy.github.io/gfx-tool-update/gfx-tool-v1.5.0.mcaddon",
+  "changelog": "Tối ưu hiệu suất, thêm UI tab Advanced, shader nhẹ."
 }
