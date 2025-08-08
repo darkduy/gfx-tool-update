@@ -1,0 +1,14 @@
+[
+    {
+        "name": "GFX Tool",
+        "file": "GFXTool.mcaddon",
+        "icon": "pack_icon_modern.png",
+        "description": "Tùy chỉnh đồ họa Minecraft PE để tăng FPS hoặc cải thiện hình ảnh."
+    },
+    {
+        "name": "Another Mod",
+        "file": "AnotherMod.mcaddon",
+        "icon": "pack_icon_modern.png",
+        "description": "Mod bổ sung nội dung mới cho Minecraft PE."
+    }
+]
