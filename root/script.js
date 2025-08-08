@@ -1,1 +1,17 @@
-const owner='darkduy',repo='gfx-tool-update',folder='mods';const apiUrl=`https://api.github.com/repos/${owner}/${repo}/contents/${folder}`;async function listMods(){const container=document.getElementById('mod-list');try{const res=await fetch(apiUrl);if(!res.ok)throw new Error('Fetch failed');const files=await res.json();container.innerHTML='';files.sort((a,b)=>b.name.localeCompare(a.name));for(const f of files){if(!f.name.toLowerCase().endsWith('.mcaddon'))continue;const card=document.createElement('div');card.className='card';card.innerHTML=`<div style="display:flex;align-items:center;gap:12px"><img src="pack_icon.png" style="width:56px;height:56px;border-radius:10px"><div style="flex:1"><h3>${f.name}</h3><p class="small">Size: ${(f.size/1024).toFixed(1)} KB</p></div></div><p class="small">View on GitHub: <a href="${f.html_url}" target="_blank">Link</a></p><div class="actions"><a class="btn" href="${f.download_url}">Tải xuống</a><a class="small" href="${f.html_url}" target="_blank">Xem trên GitHub</a></div>`;container.appendChild(card);}if(container.innerHTML.trim()==='')container.innerHTML='<p class="muted">Không tìm thấy file .mcaddon trong thư mục mods/</p>';}catch(e){console.error(e);container.innerHTML='<p class="muted">Lỗi khi tải danh sách mod.</p>'}};listMods();
+fetch('mods.json')
+    .then(response => response.json())
+    .then(mods => {
+        const container = document.getElementById('mod-list');
+        mods.forEach(mod => {
+            const card = document.createElement('div');
+            card.classList.add('mod-card');
+            card.innerHTML = `
+                <img src="${mod.icon}" alt="${mod.name}">
+                <h3>${mod.name}</h3>
+                <p>${mod.description}</p>
+                <a href="mods/${mod.file}" download>Tải xuống</a>
+            `;
+            container.appendChild(card);
+        });
+    })
+    .catch(error => console.error('Lỗi tải danh sách mod:', error));
