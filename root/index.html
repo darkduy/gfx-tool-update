@@ -1,52 +1,17 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GFX Tool Mods</title>
-<style>
-  body { font-family: Arial, sans-serif; background: #121212; color: #fff; margin: 0; padding: 0; }
-  header { background: #1e1e1e; padding: 15px; text-align: center; font-size: 1.5em; }
-  .container { padding: 20px; max-width: 800px; margin: auto; }
-  .mod-list { list-style: none; padding: 0; }
-  .mod-list li { margin: 10px 0; padding: 10px; background: #1f1f1f; border-radius: 8px; }
-  .mod-list a { color: #00d4ff; text-decoration: none; }
-  .mod-list a:hover { text-decoration: underline; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GFX Tool Mods</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>📦 GFX Tool - Danh Sách Mods</header>
-<div class="container">
-  <h2>Danh sách các bản mod</h2>
-  <ul id="modList" class="mod-list"></ul>
-</div>
-
-<script>
-  async function loadMods() {
-    try {
-      const res = await fetch('mods/');
-      const text = await res.text();
-
-      const parser = new DOMParser();
-      const htmlDoc = parser.parseFromString(text, 'text/html');
-      const links = Array.from(htmlDoc.querySelectorAll('a'));
-
-      const modList = document.getElementById('modList');
-      links.forEach(link => {
-        const file = link.getAttribute('href');
-        if (file.endsWith('.mcaddon') || file.endsWith('.mcpack')) {
-          const li = document.createElement('li');
-          li.innerHTML = `<a href="mods/${file}" download>${file}</a>`;
-          modList.appendChild(li);
-        }
-      });
-
-    } catch (err) {
-      console.error('Không thể tải danh sách mod:', err);
-    }
-  }
-
-  loadMods();
-</script>
+    <header>
+        <h1>📦 Danh sách Mods Minecraft PE</h1>
+        <p>Chọn mod bạn muốn tải về</p>
+    </header>
+    <main id="mod-list"></main>
+    <script src="script.js"></script>
 </body>
 </html>
