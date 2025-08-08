@@ -1,9 +1,72 @@
 <!doctype html>
-<html>
-  <head><meta charset="utf-8"><title>GFX Tool Updates</title></head>
-  <body>
-    <h1>GFX Tool - Update Center</h1>
-    <p>Latest: 1.5.0 — <a href="GFXTool_Full_v1.5.0.mcaddon">Download .mcaddon</a></p>
-    <p>Update JSON: <a href="update.json">update.json</a></p>
-  </body>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GFX Tool - Mods Center</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Roboto, 'Segoe UI', Arial; background:#0f1112; color:#e6eef3; margin:0; padding:24px; }
+    .container{ max-width:900px; margin:0 auto; }
+    header{ display:flex; align-items:center; gap:16px; margin-bottom:24px; }
+    img.logo{ width:64px; height:64px; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.6); }
+    h1{ margin:0; font-size:24px; }
+    p.lead{ color:#b9c6cf; margin-top:6px; }
+    .mods{ display:grid; grid-template-columns:1fr; gap:12px; margin-top:18px; }
+    .card{ background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:14px; border-radius:12px; border:1px solid rgba(255,255,255,0.03); display:flex; justify-content:space-between; align-items:center; }
+    .meta{ max-width:72%; }
+    .meta h2{ margin:0 0 6px 0; font-size:18px; }
+    .meta p{ margin:0; color:#b9c6cf; font-size:13px; }
+    .actions{ text-align:right; }
+    a.btn{ background:#0ea37b; color:white; padding:8px 12px; border-radius:8px; text-decoration:none; font-weight:600; }
+    a.btn.secondary{ background:#2b6b8a; margin-left:8px; }
+    footer{ margin-top:36px; color:#8f9fa8; font-size:13px; }
+    .small{ font-size:12px; color:#92a6af; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="pack_icon.png" class="logo" alt="GFX Tool">
+      <div>
+        <h1>GFX Tool - Mods Center</h1>
+        <p class="lead">Tải các phiên bản mod GFX Tool cho Minecraft PE. Chọn bản phù hợp với thiết bị của bạn.</p>
+      </div>
+    </header>
+
+    <section class="mods" id="modsList">
+      <!-- Cards inserted by JS -->
+    </section>
+
+    <footer>
+      <div class="small">Trang này phục vụ file .mcaddon cho mod. Nếu cần hỗ trợ, liên hệ chủ repo.</div>
+    </footer>
+  </div>
+
+<script>
+fetch('mods.json')
+  .then(r=>r.json())
+  .then(mods=>{
+    const container = document.getElementById('modsList');
+    mods.forEach(m=>{
+      const card = document.createElement('div');
+      card.className='card';
+      card.innerHTML = `
+        <div class="meta">
+          <h2>${m.name} <span class="small">v${m.version}</span></h2>
+          <p>${m.description}</p>
+          <p class="small">Changelog: ${m.changelog}</p>
+        </div>
+        <div class="actions">
+          <a class="btn" href="${m.download_url}">Tải</a>
+          <a class="btn secondary" href="${m.download_url}" download>Download</a>
+        </div>`;
+      container.appendChild(card);
+    });
+  })
+  .catch(e=>{
+    document.getElementById('modsList').innerHTML='<div class="card"><div class="meta"><h2>Không có mod nào</h2><p class="small">Vui lòng kiểm tra lại sau.</p></div></div>';
+  });
+</script>
+
+</body>
 </html>
